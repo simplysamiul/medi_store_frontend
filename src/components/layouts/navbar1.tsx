@@ -52,14 +52,14 @@ interface Navbar1Props {
 
 const Navbar = ({
   menu = [
-    { title: "Home", url: "#" },
+    { title: "Home", url: "/" },
     {
       title: "Categories",
-      url: "#",
+      url: "/categories",
     },
     {
       title: "Sellers",
-      url: "#",
+      url: "/sellers",
     },
   ],
   auth = {
@@ -69,7 +69,7 @@ const Navbar = ({
 }: Navbar1Props) => {
   return (
     <section className={cn("py-4", className)}>
-      <div className="container max-w-7xl mx-auto">
+      <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
@@ -159,12 +159,12 @@ const Navbar = ({
 const renderMenuItem = (item: MenuItem) => {
   return (
     <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink
+      <Link
         href={item.url}
         className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
       >
         {item.title}
-      </NavigationMenuLink>
+      </Link>
     </NavigationMenuItem>
   );
 };
