@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import { FaBriefcaseMedical, FaCartPlus } from "react-icons/fa";
+import Logo from "../modules/Logo";
 
 interface MenuItem {
   title: string;
@@ -74,12 +75,7 @@ const Navbar = ({
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex items-center space-x-4">
-                <span className="text-[#137FEC] text-3xl"><FaBriefcaseMedical /></span>
-                <span className="text-lg font-bold">MediStore</span>
-              </div>
-            </Link>
+            <Logo />
             <div className="flex items-center ml-6">
               <NavigationMenu>
                 <NavigationMenuList className="text-gray-600">
@@ -104,12 +100,7 @@ const Navbar = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 ml-4">
-              <div className="flex items-center space-x-2">
-                <span className="text-[#137FEC] text-3xl"><FaBriefcaseMedical /></span>
-                <span className="text-lg font-bold">MediStore</span>
-              </div>
-            </Link>
+            <Logo />
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
