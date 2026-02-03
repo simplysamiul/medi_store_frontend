@@ -90,7 +90,7 @@ const Navbar = ({
                 <span><FaCartPlus /></span>
               </Link>
             </Button>
-            <Button asChild size="sm">
+            <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-800">
               <Link href={auth.login.url}>{auth.login.title}</Link>
             </Button>
           </div>
