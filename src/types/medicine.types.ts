@@ -9,5 +9,6 @@ export interface medicineTyepe {
     med_name: string,
     seller_id: string,
     stock_quantity: string,
-    updated_at: string
+    updated_at: string,
+    category_id:string
 }

@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import {
@@ -54,6 +53,10 @@ interface Navbar1Props {
 const Navbar = ({
   menu = [
     { title: "Home", url: "/" },
+    {
+      title: "Medicines",
+      url: "/medicines",
+    },
     {
       title: "Categories",
       url: "/categories",
