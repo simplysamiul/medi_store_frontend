@@ -1,0 +1,1 @@
+export type {Routetype} from "./routes.type";

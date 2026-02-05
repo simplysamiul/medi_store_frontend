@@ -15,6 +15,9 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 
 const loginSchema = z.object({
@@ -36,9 +39,16 @@ export default function LoginPage() {
     } = useForm<LoginFormValues>({
         resolver: zodResolver(loginSchema),
     });
+    const router = useRouter();
 
     const onSubmit = async (data: LoginFormValues) => {
-        console.log("Login data:", data);
+            const res = await authClient.signIn.email(data)
+            if(res.data?.token){
+                router.push("/")
+                toast.success("Login Successfull..!")
+            }else{
+                toast.error("Login failed..!")
+            }
     };
 
     return (
