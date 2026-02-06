@@ -25,6 +25,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 /* =========================
    TYPES
@@ -85,6 +87,15 @@ const Navbar = ({
 
   const session = authClient.useSession();
   const userInfo = session.data?.user;
+  const route = useRouter();
+
+  const handleLogout = async () => {
+    const res = await authClient.signOut();
+    if (res.data?.success) {
+      route.push("/");
+      toast.success("Successfully Logout ...!");
+    }
+  };
   return (
     <section className={cn("py-4", className)}>
       <div className="container">
@@ -108,7 +119,7 @@ const Navbar = ({
               </Link>
             </Button>
 
-            {/* 🔐 AUTH AREA */}
+            {/* AUTH AREA */}
             {!userInfo ? (
               <Button asChild size="sm" className="bg-blue-600 hover:bg-blue-800">
                 <Link href={auth.login.url}>{auth.login.title}</Link>
@@ -190,6 +201,7 @@ const Navbar = ({
 const ProfileMenu = () => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const route = useRouter();
 
   // Close on outside click
   useEffect(() => {
@@ -207,6 +219,14 @@ const ProfileMenu = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleLogout = async () => {
+    const res = await authClient.signOut();
+    if (res.data?.success) {
+      route.push("/");
+      toast.success("Successfully Logout ...!");
+    }
+  };
 
   return (
     <div ref={menuRef} className="relative">
@@ -251,11 +271,6 @@ const ProfileMenu = () => {
 /* =========================
    HELPERS
 ========================= */
-
-const handleLogout = async () => {
-  await fetch("/auth/logout", { method: "POST" });
-  window.location.href = "/login";
-};
 
 const renderMenuItem = (item: MenuItem) => (
   <NavigationMenuItem key={item.title}>

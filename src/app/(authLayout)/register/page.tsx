@@ -15,6 +15,9 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Lock } from "lucide-react";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 // --------------------
 // Validation Schema
@@ -23,7 +26,7 @@ const registerSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address"),
     image: z.string().url("Invalid image URL"),
-    role: z.enum(["customer", "seller"]),
+    role: z.enum(["CUSTOMER", "SELLER"]),
     password: z.string().min(6, "Password must be at least 6 characters"),
     phone: z
         .string()
@@ -41,7 +44,7 @@ export default function RegisterForm() {
     } = useForm<RegisterFormValues>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
-            role: "customer",
+            role: "CUSTOMER",
         },
     });
 
@@ -51,13 +54,23 @@ export default function RegisterForm() {
         name: "role",
     });
 
-    const onSubmit = (data: RegisterFormValues) => {
-        const finalData = {
+    const router = useRouter();
+
+    const onSubmit = async (data: RegisterFormValues) => {
+        const userInfo = {
             ...data,
             phone: `+880${data.phone}`,
         };
 
-        console.log(finalData);
+        console.log(data.role)
+
+        const { data:userData, error } = await authClient.signUp.email(userInfo);
+        if(userData?.user){
+            router.push("/login");
+            toast.success("Your registration is successfull..! please login with your email & password..!");
+        } else if(error){
+            toast.error(error.message);
+        }
     };
 
     return (
@@ -104,7 +117,7 @@ export default function RegisterForm() {
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <input
                                         type="radio"
-                                        value="customer"
+                                        value="CUSTOMER"
                                         {...register("role")}
                                         defaultChecked
                                         className="accent-blue-600"
@@ -115,7 +128,7 @@ export default function RegisterForm() {
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <input
                                         type="radio"
-                                        value="seller"
+                                        value="SELLER"
                                         {...register("role")}
                                         className="accent-blue-600"
                                     />
@@ -130,13 +143,13 @@ export default function RegisterForm() {
                         {/* Image (Dynamic Label) */}
                         <div className="space-y-1">
                             <Label>
-                                {selectedRole === "seller"
+                                {selectedRole === "SELLER"
                                     ? "Store Logo"
                                     : "Profile Image"}
                             </Label>
                             <Input
                                 placeholder={
-                                    selectedRole === "seller"
+                                    selectedRole === "SELLER"
                                         ? "https://example.com/store-logo.png"
                                         : "https://example.com/profile-image.jpg"
                                 }
