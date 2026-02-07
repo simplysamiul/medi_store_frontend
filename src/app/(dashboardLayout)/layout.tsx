@@ -23,7 +23,6 @@ export default async function DashboardLayout({ customer, seller, admin }:
   }) {
   // get userinfo
   const { data } = await userService.getSession();
-  console.log(data)
   return (
     <SidebarProvider>
       <AppSidebar user={data.user} />

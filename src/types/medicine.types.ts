@@ -1,14 +1,12 @@
-export interface medicineTyepe {
-    created_at: string,
+interface MedicineInfo {
     expiry_date: string,
-    id: string,
     image_url: string,
-    is_active: boolean,
     manufacturer: string,
     med_des: string,
     med_name: string,
     seller_id: string,
     stock_quantity: string,
-    updated_at: string,
     category_id:string
 }
+
+export type MedicineType = Omit<MedicineInfo, "id" | "created_at" | "updated_at" | "is_active">

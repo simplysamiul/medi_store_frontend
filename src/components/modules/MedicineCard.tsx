@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export async function MedicineCard({ medicine }: { medicine: medicineTyepe }) {
     const { med_name, manufacturer, image_url, stock_quantity, category_id, id } = medicine;
-    const { data } = await categoryService.getMedicines(category_id);
+    const { data } = await categoryService.getCategoryById(category_id);
     return (
         <Card className="w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
             <div className="relative w-full h-56 sm:h-64 ">

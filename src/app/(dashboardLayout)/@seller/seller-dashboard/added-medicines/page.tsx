@@ -1,9 +1,10 @@
-import React from 'react';
+"use client";
+import MedicineAddForm from '@/components/dashboard/seller/MedicineAddForm';
 
 const AddedMedicinePage = () => {
     return (
         <div>
-            This is added medicine page
+            <MedicineAddForm />
         </div>
     );
 };
