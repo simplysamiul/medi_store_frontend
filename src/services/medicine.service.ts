@@ -6,9 +6,9 @@ const API_URL = process.env.NEXT_PUBLIC_API;
 
 
 export const medicineService = {
-    getMedicines: async function (search:string ) {
+    getMedicines: async function (search: string) {
         try {
-            const res = await fetch(`${API_URL}/medicines`);
+            const res = await fetch(`${API_URL}/medicines?search=${search}`);
             const data = await res.json();
             return { data: data, error: null }
         } catch (error) {
@@ -29,7 +29,6 @@ export const medicineService = {
     postAMedicine: async function (medicineInfo: MedicineType) {
         try {
             const cookieStore = await cookies();
-            console.log(cookieStore)
             const res = await fetch(`${API_URL}/medicines`, {
                 method: "POST",
                 headers: {
@@ -40,6 +39,22 @@ export const medicineService = {
             });
             const data = await res.json();
             console.log(data)
+            return { data: data, error: null }
+        } catch (error) {
+            return { data: null, error: { message: "Something went wrong" } }
+        }
+    },
+
+    deleteMedicineById: async function (medicineId: string) {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/medicines/${medicineId}`, {
+                method: "DELETE",
+                headers: {
+                    Cookie: cookieStore.toString(),
+                },
+            });
+            const data = await res.json();
             return { data: data, error: null }
         } catch (error) {
             return { data: null, error: { message: "Something went wrong" } }

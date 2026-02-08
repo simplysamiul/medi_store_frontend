@@ -1,9 +1,12 @@
-import React from 'react';
+
+import ManageMedicine from "@/components/dashboard/seller/ManageMedicine";
+
 
 const ManageMedicinesPage = () => {
+
     return (
         <div>
-            This is ManageMedicinesPage
+            <ManageMedicine />
         </div>
     );
 };

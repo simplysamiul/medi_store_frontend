@@ -49,12 +49,6 @@ type User = {
 
 interface NavbarProps {
   className?: string;
-
-  /**
-   * 🔐 USER DATA
-   * Pass `null` if user is NOT logged in
-   * Pass user object if logged in
-   */
   user?: User | null;
 
   menu?: MenuItem[];

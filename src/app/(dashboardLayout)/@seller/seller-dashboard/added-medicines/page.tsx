@@ -1,4 +1,4 @@
-"use client";
+
 import MedicineAddForm from '@/components/dashboard/seller/MedicineAddForm';
 
 const AddedMedicinePage = () => {
