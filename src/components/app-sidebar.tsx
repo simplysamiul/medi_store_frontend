@@ -12,14 +12,29 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+import { LogOut } from "lucide-react"
 import { adminRoutes } from "@/routes/adminRoutes"
 import { sellerRoutes } from "@/routes/sellerRoute"
 import { customerRoutes } from "@/routes/customerRoute"
 import { Routetype } from "@/types"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import clsx from "clsx"
-import { LogOut } from "lucide-react"
+import { authClient } from "@/lib/auth-client"
+import { toast } from "react-toastify"
+import Logo from "./modules/Logo"
 
 export function AppSidebar({
   user,
@@ -27,7 +42,8 @@ export function AppSidebar({
 }: {
   user: { role: string }
 } & React.ComponentProps<typeof Sidebar>) {
-  const pathname = usePathname()
+  const pathname = usePathname();
+  const route = useRouter();
 
   let routes: Routetype[] = []
   switch (user.role) {
@@ -42,6 +58,15 @@ export function AppSidebar({
       break
   }
 
+  // logout function
+  const handleLogOut = async () => {
+    const res = await authClient.signOut();
+    if (res.data?.success) {
+      route.push("/");
+      toast.success("Successfully Logout ...!");
+    }
+  }
+
   return (
     <Sidebar
       {...props}
@@ -52,6 +77,7 @@ export function AppSidebar({
     >
       {/* MAIN CONTENT */}
       <SidebarContent className="px-2 py-4">
+        <Logo />
         {routes.map((group) => (
           <SidebarGroup key={group.title} className="mb-6">
             <SidebarGroupLabel
@@ -112,20 +138,49 @@ export function AppSidebar({
 
       {/* FOOTER (LOGOUT) */}
       <SidebarFooter className="p-3">
-        <SidebarMenuButton
-          className="
-            flex items-center gap-3 rounded-xl px-3 py-2
-            border-red-400 border
-            text-red-400 hover:bg-red-500/10 hover:text-red-600
-          "
-          onClick={() => {
-            // TODO: call your logout logic
-            console.log("logout")
-          }}
-        >
-          <LogOut className="h-4 w-4" />
-          <span className="text-lg font-medium">Logout</span>
-        </SidebarMenuButton>
+        <AlertDialog>
+
+          {/* Trigger Button */}
+          <AlertDialogTrigger asChild>
+            <SidebarMenuButton
+              className="
+              flex items-center gap-3 rounded-xl px-3 py-2
+              border-red-400 border
+              text-red-400 hover:bg-red-500/10 hover:text-red-600
+            "
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="text-lg font-medium">Logout</span>
+            </SidebarMenuButton>
+          </AlertDialogTrigger>
+
+          {/* Dialog Content */}
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                Are you sure you want to logout?
+              </AlertDialogTitle>
+
+              <AlertDialogDescription>
+                You will be signed out of your account and need to log in again.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+
+            <AlertDialogFooter>
+              <AlertDialogCancel>
+                Cancel
+              </AlertDialogCancel>
+
+              <AlertDialogAction
+                onClick={handleLogOut}
+                className="bg-red-600 hover:bg-red-700"
+              >
+                Yes, Logout
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+
+        </AlertDialog>
       </SidebarFooter>
 
       <SidebarRail />

@@ -6,7 +6,7 @@ const API_URL = process.env.NEXT_PUBLIC_API;
 
 
 export const medicineService = {
-    getMedicines: async function () {
+    getMedicines: async function (search:string ) {
         try {
             const res = await fetch(`${API_URL}/medicines`);
             const data = await res.json();

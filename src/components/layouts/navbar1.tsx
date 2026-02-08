@@ -72,7 +72,7 @@ interface NavbarProps {
 ========================= */
 
 const Navbar = ({
-  user = null, // ✅ USER DATA COMES FROM SERVER HERE
+  user = null, 
   menu = [
     { title: "Home", url: "/" },
     { title: "Medicines", url: "/medicines" },
