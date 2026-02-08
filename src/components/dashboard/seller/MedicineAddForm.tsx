@@ -60,6 +60,7 @@ export default function AddMedicinePage() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<MedicineFormValues>({
     resolver: zodResolver(medicineSchema),
@@ -87,15 +88,16 @@ export default function AddMedicinePage() {
         setLoading(true);
         const medicineInfo:MedicineType = {
           ...data,
+          expiry_date: new Date(data.expiry_date),
           seller_id: seassion.data?.user.id
         }
 
+        // post medicine
         const res = await postMedicine(medicineInfo);
-        // console.log(res) 
-        // console.log(seassion) 
-        console.log(seassion.data?.user.id) 
-
-        toast.success("Medicine added successfully");
+        if(res.data.success){
+          reset();
+          toast.success("Medicine added successfully");
+        }
       }
     } catch (error) {
       console.error(error);

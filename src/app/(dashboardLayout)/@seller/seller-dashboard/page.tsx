@@ -1,11 +1,7 @@
-import React from 'react';
+import { redirect } from 'next/navigation';
 
 const SellerDashbaord = () => {
-    return (
-        <div>
-            This is seller dashboard
-        </div>
-    );
+    return redirect("/seller-dashboard/added-medicines");
 };
 
 export default SellerDashbaord;

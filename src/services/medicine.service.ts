@@ -37,8 +37,6 @@ export const medicineService = {
                     Cookie: cookieStore.toString(),
                 },
                 body: JSON.stringify(medicineInfo),
-                credentials: "include",
-                cache: "no-store",
             });
             const data = await res.json();
             console.log(data)

@@ -1,5 +1,5 @@
 interface MedicineInfo {
-    expiry_date: string,
+    expiry_date: Date,
     image_url: string,
     manufacturer: string,
     med_des: string,

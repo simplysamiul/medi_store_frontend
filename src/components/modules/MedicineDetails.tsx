@@ -11,7 +11,7 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 export default async function MedicineDetails({ medicineId }: { medicineId: string }) {
     const { data } = await medicineService.getMedicineById(medicineId);
     const { image_url, med_name, stock_quantity, med_des, manufacturer, expiry_date, category_id } = data.data;
-    const { data: category } = await categoryService.getMedicines(category_id);
+    const { data: category } = await categoryService.getCategoryById(category_id);
     const { category_name, descripting } = category.data;
 
     const inStock = Number(stock_quantity) > 0;
@@ -57,10 +57,6 @@ export default async function MedicineDetails({ medicineId }: { medicineId: stri
                             <h1 className="text-2xl sm:text-3xl font-bold leading-tight">
                                 {med_name}
                             </h1>
-
-                            <p className="text-gray-600 leading-relaxed">
-                                {med_des}
-                            </p>
 
                             {/* Meta Grid */}
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
