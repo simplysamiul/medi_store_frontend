@@ -1,7 +1,7 @@
 export interface CategoryType {
-    category_name: string,
-    created_at?: string,
-    descripting: string,
-    id?: string,
-    updated_at?: string
+    id: string;
+    category_name: string;
+    descripting: string;
+    created_at: string;
+    updated_at: string;
 }

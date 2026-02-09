@@ -1,5 +1,6 @@
 "use server";
 
+import { Category } from "@/components/dashboard/admin/EditCategory";
 import { categoryService } from "@/services/category.service"
 import { CategoryType } from "@/types";
 
@@ -12,6 +13,10 @@ export const getCategories = async () => {
     return await categoryService.getAllCategories();
 };
 
+
+export const updateCategoryById = async (categoryId:string, category:Category) => {
+    return await categoryService.updateCategoryById(categoryId, category);
+};
 
 export const deleteCategoryById = async (categoryId:string) => {
     return await categoryService.deleteCategoryById(categoryId);

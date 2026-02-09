@@ -1,3 +1,4 @@
+import { Category } from "@/components/dashboard/admin/EditCategory";
 import { CategoryType } from "@/types";
 import { cookies } from "next/headers";
 
@@ -6,7 +7,7 @@ const API_URL = process.env.NEXT_PUBLIC_API;
 
 export const categoryService = {
 
-     addCategory: async function (category:CategoryType) {
+    addCategory: async function (category: CategoryType) {
         try {
             const cookieStore = await cookies();
             const res = await fetch(`${API_URL}/categories`, {
@@ -38,6 +39,24 @@ export const categoryService = {
     getAllCategories: async function () {
         try {
             const res = await fetch(`${API_URL}/categories`);
+            const data = await res.json();
+            return { data: data, error: null }
+        } catch (error) {
+            return { data: null, error: { message: "Something went wrong" } }
+        }
+    },
+
+    updateCategoryById: async function (catId:string,category: Category) {
+        try {
+            const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/categories/${catId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Cookie: cookieStore.toString(),
+                },
+                body: JSON.stringify(category),
+            });
             const data = await res.json();
             return { data: data, error: null }
         } catch (error) {
