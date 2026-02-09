@@ -28,6 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { Pencil, Trash2 } from "lucide-react";
 import { deleteMedicineById } from "@/actions/medicine.action";
 import { toast } from "react-toastify";
+import EditMedicineModal from "./EditMedicineModal";
 
 export interface MedicineType {
     id: string;
@@ -55,6 +56,8 @@ export default function ManageMedicineTable({
     onDelete?: (id: string) => void;
 }) {
     const [search, setSearch] = useState("");
+    const [editingMedicine, setEditingMedicine] = useState<MedicineType | null>(null);
+
 
     const filtered = useMemo(() => {
         if (!search) return medicines;
@@ -134,10 +137,11 @@ export default function ManageMedicineTable({
                                             <Button
                                                 size="icon"
                                                 variant="outline"
-                                                onClick={() => onEdit?.(med)}
+                                                onClick={() => setEditingMedicine(med)}
                                             >
                                                 <Pencil className="w-4 h-4" />
                                             </Button>
+
 
                                             <DeleteButton
                                                 id={med.id}
@@ -184,10 +188,11 @@ export default function ManageMedicineTable({
                                             <Button
                                                 size="icon"
                                                 variant="outline"
-                                                onClick={() => onEdit?.(med)}
+                                                onClick={() => setEditingMedicine(med)}
                                             >
                                                 <Pencil className="w-4 h-4" />
                                             </Button>
+
 
                                             <DeleteButton
                                                 id={med.id}
@@ -200,6 +205,18 @@ export default function ManageMedicineTable({
                     </div>
                 </CardContent>
             </Card>
+
+            {/* edit modal  */}
+            <EditMedicineModal
+                open={!!editingMedicine}
+                medicine={editingMedicine}
+                onClose={() => setEditingMedicine(null)}
+                onSuccess={() => {
+                    setEditingMedicine(null);
+                    toast.success("Medicine updated successfully");
+                }}
+            />
+
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import "server-only";
 import { MedicineType } from "@/types";
 import { cookies } from "next/headers";
+import { UpdateMed } from "@/components/dashboard/seller/EditMedicineModal";
 
 const API_URL = process.env.NEXT_PUBLIC_API;
 
@@ -53,6 +54,25 @@ export const medicineService = {
                 headers: {
                     Cookie: cookieStore.toString(),
                 },
+            });
+            const data = await res.json();
+            return { data: data, error: null }
+        } catch (error) {
+            return { data: null, error: { message: "Something went wrong" } }
+        }
+    },
+
+    updateMedicineById: async function ({updatedMedicine, medId}:{updatedMedicine:UpdateMed, medId:string}) {
+        try {
+            const cookieStore = await cookies();
+            console.log(cookieStore)
+            const res = await fetch(`${API_URL}/medicines/${medId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Cookie: cookieStore.toString(),
+                },
+                body: JSON.stringify(updatedMedicine),
             });
             const data = await res.json();
             return { data: data, error: null }
