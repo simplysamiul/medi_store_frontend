@@ -1,10 +1,11 @@
+import UsersList from '@/components/dashboard/admin/UsersList';
 import React from 'react';
 
 const AllUsersPage = () => {
     return (
-        <div>
-            This is all users page
-        </div>
+        <>
+           <UsersList /> 
+        </>
     );
 };
 

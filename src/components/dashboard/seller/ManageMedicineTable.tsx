@@ -49,7 +49,6 @@ export interface MedicineType {
 
 export default function ManageMedicineTable({
     medicines,
-    onEdit,
 }: {
     medicines?: MedicineType[];
     onEdit?: (med: MedicineType) => void;
@@ -57,6 +56,7 @@ export default function ManageMedicineTable({
 }) {
     const [search, setSearch] = useState("");
     const [editingMedicine, setEditingMedicine] = useState<MedicineType | null>(null);
+
 
 
     const filtered = useMemo(() => {
@@ -206,7 +206,7 @@ export default function ManageMedicineTable({
                 </CardContent>
             </Card>
 
-            {/* edit modal  */}
+            {/* ================= EDIT DIALOG ================= */}
             <EditMedicineModal
                 open={!!editingMedicine}
                 medicine={editingMedicine}

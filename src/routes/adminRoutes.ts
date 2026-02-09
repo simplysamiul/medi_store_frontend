@@ -9,10 +9,6 @@ export const adminRoutes:Routetype[] = [
                 url: "/admin-dashboard/all-users",
             },
             {
-                title: "Manage Users",
-                url: "/admin-dashboard/manage-users",
-            },
-            {
                 title: "Medicine List",
                 url: "/admin-dashboard/medicine-list",
             },

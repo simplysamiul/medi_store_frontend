@@ -1,11 +1,7 @@
-import React from 'react';
+import { redirect } from 'next/navigation';
 
 const AdminDashboard = () => {
-    return (
-        <div>
-            This is admin dashboard
-        </div>
-    );
+    return redirect("/admin-dashboard/all-users");
 };
 
 export default AdminDashboard;
