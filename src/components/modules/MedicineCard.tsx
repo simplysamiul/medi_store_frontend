@@ -2,11 +2,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ShoppingCart, Star } from "lucide-react";
-import { medicineTyepe } from "@/types/medicine.types";
+import { MedicineType } from "@/types/medicine.types";
 import { categoryService } from "@/services/category.service";
 import Link from "next/link";
 
-export async function MedicineCard({ medicine }: { medicine: medicineTyepe }) {
+export async function MedicineCard({ medicine }: { medicine: MedicineType }) {
     const { med_name, manufacturer, image_url, stock_quantity, category_id, id, price } = medicine;
     const { data } = await categoryService.getCategoryById(category_id);
     return (

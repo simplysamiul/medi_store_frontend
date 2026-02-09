@@ -66,7 +66,7 @@ interface NavbarProps {
 ========================= */
 
 const Navbar = ({
-  user = null, 
+  user = null,
   menu = [
     { title: "Home", url: "/" },
     { title: "Medicines", url: "/medicines" },
@@ -82,6 +82,8 @@ const Navbar = ({
   const userInfo = session.data?.user;
   const route = useRouter();
 
+  console.log(userInfo)
+
   const handleLogout = async () => {
     const res = await authClient.signOut();
     if (res.data?.success) {
@@ -89,6 +91,9 @@ const Navbar = ({
       toast.success("Successfully Logout ...!");
     }
   };
+
+
+
   return (
     <section className={cn("py-4", className)}>
       <div className="container">
@@ -106,11 +111,11 @@ const Navbar = ({
           </div>
 
           <div className="flex gap-2 items-center">
-            <Button variant="outline" size="sm" asChild>
+            {userInfo && <Button variant="outline" size="sm" asChild>
               <Link href="/cart">
                 <FaCartPlus />
               </Link>
-            </Button>
+            </Button>}
 
             {/* AUTH AREA */}
             {!userInfo ? (
@@ -146,14 +151,14 @@ const Navbar = ({
                 </SheetHeader>
 
                 <div className="flex flex-col gap-6 p-4">
-                  <Accordion type="single" collapsible>
+                  <div className="flex flex-col gap-4">
                     {menu.map(renderMobileMenuItem)}
-                  </Accordion>
+                  </div>
 
                   <div className="flex flex-col gap-3">
-                    <Button variant="outline" asChild>
+                    {userInfo && <Button variant="outline" asChild>
                       <Link href="/cart">Add To Cart</Link>
-                    </Button>
+                    </Button>}
 
                     {!user ? (
                       <Button asChild>
