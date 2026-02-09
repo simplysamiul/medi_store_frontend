@@ -7,7 +7,7 @@ import { categoryService } from "@/services/category.service";
 import Link from "next/link";
 
 export async function MedicineCard({ medicine }: { medicine: medicineTyepe }) {
-    const { med_name, manufacturer, image_url, stock_quantity, category_id, id } = medicine;
+    const { med_name, manufacturer, image_url, stock_quantity, category_id, id, price } = medicine;
     const { data } = await categoryService.getCategoryById(category_id);
     return (
         <Card className="w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
@@ -48,8 +48,7 @@ export async function MedicineCard({ medicine }: { medicine: medicineTyepe }) {
 
                 {/* Bottom Row */}
                 <div className="flex items-center justify-between pt-2">
-                    <p className="text-xl font-bold">$ 10.00</p>
-
+                    <p className="text-xl font-bold"> $ {price ? price : 10}.00</p>
 
                     <Button
                         size="icon"
