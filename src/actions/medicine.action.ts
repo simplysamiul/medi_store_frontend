@@ -5,6 +5,10 @@ import { medicineService } from "@/services/medicine.service";
 import { MedicineType } from "@/types";
 
 
+export const getAllMedicines = async () => {
+    return await medicineService.getMedicines("");
+};
+
 export const postMedicine = async (medicineInfo:MedicineType) => {
     return await medicineService.postAMedicine(medicineInfo);
 };

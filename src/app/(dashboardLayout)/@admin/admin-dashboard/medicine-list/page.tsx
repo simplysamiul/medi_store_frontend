@@ -1,9 +1,9 @@
-import React from 'react';
+import AllMedicineList from '@/components/dashboard/admin/AllMedicineList';
 
 const MedicineListPage = () => {
     return (
         <div>
-            Thsi si medicine list page 
+            <AllMedicineList />
         </div>
     );
 };
