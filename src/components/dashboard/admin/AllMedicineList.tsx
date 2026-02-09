@@ -6,8 +6,28 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
+export type Medicine = {
+  id: string;
+  med_name: string;
+  med_des: string;
+  manufacturer: string;
+  stock_quantity: string;   
+  expiry_date: string;    
+  image_url: string;
+  seller_id: string;
+  category_id: string;
+  price: number | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+
+
+
+
 export default function AllMedicineList() {
-  const [medicines, setMedicines] = useState<any[]>([]);
+  const [medicines, setMedicines] = useState<Medicine[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

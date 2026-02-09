@@ -1,9 +1,9 @@
-import React from 'react';
+import CategoryList from '@/components/dashboard/admin/CategoriesList';
 
 const ManageCategoriesPage = () => {
     return (
         <div>
-           this is manage categories page  
+           <CategoryList /> 
         </div>
     );
 };
