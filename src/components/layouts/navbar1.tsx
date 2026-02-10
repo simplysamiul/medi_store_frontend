@@ -4,13 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { FaBriefcaseMedical, FaCartPlus, FaUserCircle } from "react-icons/fa";
-
 import { cn } from "@/lib/utils";
 import Logo from "../modules/Logo";
-
-import {
-  Accordion,
-} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -27,6 +22,7 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/context/cart.context";
 
 /* =========================
    TYPES
@@ -82,8 +78,6 @@ const Navbar = ({
   const userInfo = session.data?.user;
   const route = useRouter();
 
-  console.log(userInfo)
-
   const handleLogout = async () => {
     const res = await authClient.signOut();
     if (res.data?.success) {
@@ -92,7 +86,9 @@ const Navbar = ({
     }
   };
 
-
+  // add to cart state
+  const { state } = useCart();
+  const addedCart = state.items.length;
 
   return (
     <section className={cn("py-4", className)}>
@@ -111,11 +107,26 @@ const Navbar = ({
           </div>
 
           <div className="flex gap-2 items-center">
-            {userInfo && <Button variant="outline" size="sm" asChild>
-              <Link href="/cart">
-                <FaCartPlus />
-              </Link>
-            </Button>}
+            {userInfo && (
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+                className="relative"
+              >
+                <Link href="/cart" className="relative">
+                  <FaCartPlus className="text-lg" />
+
+                  {addedCart > 0 && (
+                    <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1
+          flex items-center justify-center
+          rounded-full bg-red-500 text-white text-[10px] font-semibold">
+                      {addedCart}
+                    </span>
+                  )}
+                </Link>
+              </Button>
+            )}
 
             {/* AUTH AREA */}
             {!userInfo ? (

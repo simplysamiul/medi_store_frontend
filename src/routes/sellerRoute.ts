@@ -11,10 +11,6 @@ export const sellerRoutes:Routetype[] = [
             {
                 title: "Manage Medicines",
                 url: "/seller-dashboard/manage-medicines",
-            },
-            {
-                title: "Manage Orders",
-                url: "/seller-dashboard/manage-orders",
             }
         ],
     }

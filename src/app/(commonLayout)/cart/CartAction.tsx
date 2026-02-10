@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/cart.context";
 
-interface Props {
+interface Medicine {
   medicine: {
     id: string;
     name: string;
@@ -15,7 +15,7 @@ interface Props {
   };
 }
 
-export default function CartAction({ medicine }: Props) {
+export default function CartAction({ medicine }: Medicine) {
   const router = useRouter();
   const { state, dispatch } = useCart();
 

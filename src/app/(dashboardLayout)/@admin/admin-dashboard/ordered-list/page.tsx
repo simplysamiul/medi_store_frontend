@@ -1,9 +1,10 @@
+import OrderedList from '@/components/dashboard/admin/OrderedList';
 import React from 'react';
 
 const OrderedListPage = () => {
     return (
         <div>
-            Thsi is ordered list page
+            <OrderedList />
         </div>
     );
 };

@@ -1,14 +1,15 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { ShoppingCart, Star } from "lucide-react";
 import { MedicineType } from "@/types/medicine.types";
 import { categoryService } from "@/services/category.service";
 import Link from "next/link";
+import HomeAddToCart from "../home/HomeAddToCart";
 
 export async function MedicineCard({ medicine }: { medicine: MedicineType }) {
     const { med_name, manufacturer, image_url, stock_quantity, category_id, id, price } = medicine;
     const { data } = await categoryService.getCategoryById(category_id);
+    const cartMedicine = {id, name:med_name, image:image_url, price, stock:stock_quantity}
+
     return (
         <Card className="w-full overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
             <div className="relative w-full h-56 sm:h-64 ">
@@ -50,12 +51,7 @@ export async function MedicineCard({ medicine }: { medicine: MedicineType }) {
                 <div className="flex items-center justify-between pt-2">
                     <p className="text-xl font-bold"> $ {price ? price : 10}.00</p>
 
-                    <Button
-                        size="icon"
-                        className="rounded-xl bg-blue-100 text-blue-600 hover:bg-blue-200"
-                    >
-                        <ShoppingCart />
-                    </Button>
+                    <HomeAddToCart medicine={cartMedicine} />
                 </div>
             </CardContent>
         </Card>

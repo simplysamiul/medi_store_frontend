@@ -5,10 +5,6 @@ export const customerRoutes:Routetype[] = [
         title: "Customer-Dashboard",
         items: [
             {
-                title: "View cart",
-                url: "/dashboard/view-cart",
-            },
-            {
                 title: "Ordered Medicine",
                 url: "/dashboard/ordered-medicine",
             },

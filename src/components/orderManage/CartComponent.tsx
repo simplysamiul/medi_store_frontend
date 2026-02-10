@@ -8,6 +8,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { createOrder } from "@/actions/order.action";
+import { authClient } from "@/lib/auth-client";
+
+export interface OrderItem {
+  customer_id: string;
+  orderItems: [];
+  shipping_address: string ;
+  total_amount: string | number;
+}
 
 const CartComponent = () => {
   const { state, dispatch } = useCart();
@@ -26,7 +35,9 @@ const CartComponent = () => {
   );
 
   /* ================= CONFIRM ORDER ================= */
-  const handleConfirmOrder = () => {
+  const session = authClient.useSession();
+  const customer_id = session.data?.user.id;
+  const handleConfirmOrder = async () => {
     if (!shipping.name || !shipping.phone || !shipping.address) {
       toast.error("Please fill all shipping details");
       return;
@@ -38,11 +49,14 @@ const CartComponent = () => {
     }
 
     const orderPayload = {
-      items: state.items,
-      shipping,
-      totalPrice,
+      customer_id,
+      orderItems: state.items,
+      shipping_address:shipping,
+      total_amount:totalPrice,
     };
 
+    const res = await createOrder(orderPayload);
+    console.log("response", res)
     console.log("ORDER DATA 👉", orderPayload);
 
     toast.success("Order confirmed!");
