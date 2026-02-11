@@ -1,11 +1,12 @@
+import TrackOrder from '@/components/dashboard/customer/TrackOrder';
 import React from 'react';
 
-const TrackOrder = () => {
+const TrackOrderPage = () => {
     return (
         <div>
-            Thsi is track order poage
+            <TrackOrder />
         </div>
     );
 };
 
-export default TrackOrder;
+export default TrackOrderPage;
