@@ -2,7 +2,7 @@ import AllMedicines from '@/components/modules/AllMedicines';
 
 const MedicinesPage = () => {
     return (
-        <div>
+        <div className='mt-6'>
             <AllMedicines />
         </div>
     );

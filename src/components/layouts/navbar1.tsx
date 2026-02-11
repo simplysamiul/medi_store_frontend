@@ -95,7 +95,7 @@ const Navbar = ({
       <div className="container">
 
         {/* ================= DESKTOP MENU ================= */}
-        <nav className="hidden items-center justify-between lg:flex">
+        <nav className="hidden items-center justify-between lg:flex border-b-2 border-blue-200">
           <div className="flex items-center gap-6">
             <Logo />
 
@@ -167,11 +167,8 @@ const Navbar = ({
                   </div>
 
                   <div className="flex flex-col gap-3">
-                    {userInfo && <Button variant="outline" asChild>
-                      <Link href="/cart">Add To Cart</Link>
-                    </Button>}
 
-                    {!user ? (
+                    {!userInfo ? (
                       <Button asChild>
                         <Link href={auth.login.url}>{auth.login.title}</Link>
                       </Button>
@@ -184,6 +181,13 @@ const Navbar = ({
                           Dashboard
                         </Link>
 
+                        <Link
+                          href="/profile"
+                          className="text-sm font-semibold"
+                        >
+                          Profile
+                        </Link>
+
                         <button
                           onClick={handleLogout}
                           className="text-left text-sm text-red-500"
@@ -192,6 +196,9 @@ const Navbar = ({
                         </button>
                       </>
                     )}
+                    {userInfo && <Button variant="outline" asChild>
+                      <Link href="/cart">Add To Cart</Link>
+                    </Button>}
                   </div>
                 </div>
               </SheetContent>
@@ -259,7 +266,7 @@ const ProfileMenu = () => {
           </Link>
 
           <Link
-            href="/dashboard"
+            href="/profile"
             onClick={() => setOpen(false)}
             className="block px-4 py-2 text-sm hover:bg-blue-200"
           >

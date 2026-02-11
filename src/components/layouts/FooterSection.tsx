@@ -9,7 +9,7 @@ import Logo from "../modules/Logo"
 
 export default function FooterSection() {
   return (
-    <footer className="bg-white mt-8">
+    <footer className="border border-blue-200 mt-8">
       <div className="px-6 pt-12 pb-6">
         {/* Top Section */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
