@@ -36,6 +36,17 @@ export const orderService = {
         } catch (error) {
             return { data: null, error: { message: "Something went wrong" } }
         }
+
+    },
+    getOrdersByCustomerId: async function (customerId:string) {
+        try {
+            // const cookieStore = await cookies();
+            const res = await fetch(`${API_URL}/orders/${customerId}`);
+            const data = await res.json();
+            return { data: data, error: null }
+        } catch (error) {
+            return { data: null, error: { message: "Something went wrong" } }
+        }
     },
 
     updateOrder: async function (orderId:string, orderStatus: string) {
