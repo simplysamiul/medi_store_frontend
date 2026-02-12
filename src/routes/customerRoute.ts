@@ -11,10 +11,6 @@ export const customerRoutes:Routetype[] = [
             {
                 title: "Track Order",
                 url: "/dashboard/track-order",
-            },
-            {
-                title: "Provide Review",
-                url: "/dashboard/provide-review",
             }
         ],
     }
