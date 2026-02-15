@@ -13,7 +13,7 @@ export interface Medicine {
     stock: number;
 }
 
-const HomeAddToCart = ({ medicine }: { medicine: Medicine }) => {
+const HomeAddToCart = ({ medicine }: { medicine: any }) => {
     const { state, dispatch } = useCart();
     const alreadyInCart = state.items.some(
         (item) => item.id === medicine.id

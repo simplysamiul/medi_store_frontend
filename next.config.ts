@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next'
- 
+
 const config: NextConfig = {
   images: {
     remotePatterns: [
@@ -9,6 +9,15 @@ const config: NextConfig = {
       },
     ],
   },
-}
- 
+  async rewrites() {
+    return [
+      {
+        source: "/api/auth/:path*",
+        destination: `${process.env.NEXT_PUBLIC_API}/auth/:path*`,
+      },
+    ];
+  },
+};
+
+
 export default config

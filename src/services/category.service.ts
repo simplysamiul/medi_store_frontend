@@ -1,3 +1,4 @@
+import "server-only";
 import { Category } from "@/components/dashboard/admin/EditCategory";
 import { CategoryType } from "@/types";
 import { cookies } from "next/headers";

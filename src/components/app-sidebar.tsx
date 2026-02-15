@@ -40,13 +40,13 @@ export function AppSidebar({
   user,
   ...props
 }: {
-  user: { role: string }
+  user: string
 } & React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const route = useRouter();
 
   let routes: Routetype[] = []
-  switch (user.role) {
+  switch (user) {
     case "ADMIN":
       routes = adminRoutes
       break

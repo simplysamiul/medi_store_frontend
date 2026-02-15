@@ -43,6 +43,7 @@ export default function LoginPage() {
 
     const onSubmit = async (data: LoginFormValues) => {
             const res = await authClient.signIn.email(data)
+            console.log(res)
             if(res.data?.token){
                 router.push("/")
                 toast.success("Login Successfull..!")

@@ -2,10 +2,9 @@
 
 import { Category } from "@/components/dashboard/admin/EditCategory";
 import { categoryService } from "@/services/category.service"
-import { CategoryType } from "@/types";
 
 
-export const addCategory = async (category:CategoryType) => {
+export const addCategory = async (category:any) => {
     return await categoryService.addCategory(category);
 };
 

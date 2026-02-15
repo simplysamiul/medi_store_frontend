@@ -106,7 +106,7 @@ export default function CategoryList() {
                         </TableHeader>
 
                         <TableBody>
-                            {categories.map((cat: Category) => (
+                            {categories.map((cat: any) => (
                                 <TableRow key={cat.id}>
                                     <TableCell className="font-medium">
                                         {cat.category_name}
@@ -175,7 +175,7 @@ export default function CategoryList() {
 
                 {/* ================= MOBILE / TABLET CARDS ================= */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-                    {categories.map((cat: Category) => (
+                    {categories.map((cat: any) => (
                         <div
                             key={cat.id}
                             className="rounded-2xl border p-4 shadow-sm space-y-3"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import { AlertCircle } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { updateUserById } from "@/actions/user.action";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 // ================= TYPES =================
 interface ProfileFormValues {
@@ -24,27 +25,27 @@ export default function ProfileComponent() {
   const user = session.data?.user;
 
   const { register, handleSubmit, reset, formState: { isDirty, isValid } } = useForm<ProfileFormValues>({
-  defaultValues: { name: "", email: "", phone: "", image: "" },
-  mode: "onChange",
-});
+    defaultValues: { name: "", email: "", phone: "", image: "" },
+    mode: "onChange",
+  });
 
-useEffect(() => {
-  if (user) {
-    reset({
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      image: user.image,
-    });
-  }
-}, [user, reset]);
+  useEffect(() => {
+    if (user) {
+      reset({
+        name: user.name ?? "",
+        email: user.email ?? "",
+        phone: (user as any).phone ?? "",
+        image: user.image ?? "",
+      });
+    }
+  }, [user, reset]);
 
   // ================= UPDATE HANDLER =================
   const onSubmit = async (data: ProfileFormValues) => {
     try {
 
       const res = await updateUserById(user?.id as string, data);
-      if(res.data?.success){
+      if (res.data?.success) {
         toast.success("Profile Update successfully ..!")
       }
 
@@ -57,7 +58,7 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
-        <h2 className="font-bold text-lg">Update Your Profile</h2>
+      <h2 className="font-bold text-lg">Update Your Profile</h2>
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Email Verification Notification */}
         {!user.emailVerified && (
@@ -71,8 +72,10 @@ useEffect(() => {
           <CardContent className="p-6 sm:p-10 space-y-8">
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-              <img
-                src={user.image}
+              <Image
+                src={(user as any).image}
+                width={24}
+                height={24}
                 alt="Profile"
                 className="w-24 h-24 rounded-full object-cover border"
               />
@@ -134,20 +137,19 @@ useEffect(() => {
             <div>
               <p className="text-sm text-gray-500">Account Role</p>
               <Badge className="mt-1 px-4 py-1 rounded-full">
-                {user.role}
+                {(user as any).role}
               </Badge>
             </div>
 
             <div>
               <p className="text-sm text-gray-500">Account Status</p>
               <Badge
-                className={`mt-1 px-4 py-1 rounded-full ${
-                  user.status === "BLOCKED"
+                className={`mt-1 px-4 py-1 rounded-full ${(user as any).status === "BLOCKED"
                     ? "bg-red-100 text-red-700"
                     : "bg-green-100 text-green-700"
-                }`}
+                  }`}
               >
-                {user.status}
+                {(user as any).status}
               </Badge>
             </div>
           </CardContent>

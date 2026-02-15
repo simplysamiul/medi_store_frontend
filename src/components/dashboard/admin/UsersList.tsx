@@ -48,9 +48,10 @@ const UsersList = () => {
     const [editingUser, setEditingUser] = useState<User | null>(null);
 
     useEffect(() => {
-        const fetchUsers = async () => {
+        (async () => {
             try {
                 const res = await getAllUsers();
+
                 if (res?.data?.success) {
                     setUsers(res.data.data);
                 }
@@ -59,11 +60,8 @@ const UsersList = () => {
             } finally {
                 setLoading(false);
             }
-        };
-
-        fetchUsers();
+        })();
     }, []);
-
     /* ================= DELETE ================= */
     const handleDelete = async (id: string) => {
         try {

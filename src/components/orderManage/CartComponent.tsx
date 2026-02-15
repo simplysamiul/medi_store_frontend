@@ -57,7 +57,7 @@ const CartComponent = () => {
 
     const res = await createOrder(orderPayload);
     console.log("response", res)
-    console.log("ORDER DATA 👉", orderPayload);
+    console.log("ORDER DATA", orderPayload);
 
     toast.success("Order confirmed!");
 

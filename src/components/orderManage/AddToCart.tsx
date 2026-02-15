@@ -1,9 +1,8 @@
 "use client";
 
 import { useCart } from "@/context/cart.context";
-import { MedicineType } from "@/types";
 
-const AddToCartButton = ({ product }: { product: MedicineType }) => {
+const AddToCartButton = ({ product }: { product: any }) => {
   const { dispatch } = useCart();
 
   const addToCart = () => {

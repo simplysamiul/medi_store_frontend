@@ -7,7 +7,7 @@ export const getAllUsers = async () => {
     return await userService.getAllUsers();
 };
 
-export const updateUserById = async (userId:string, userData:updatedUser) => {
+export const updateUserById = async (userId:string, userData:any) => {
     return await userService.updateUserById(userId, userData);
 };
 

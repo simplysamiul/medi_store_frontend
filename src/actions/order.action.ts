@@ -1,9 +1,8 @@
 "use server";
 
-import { OrderItem } from "@/components/orderManage/CartComponent";
 import { orderService } from "@/services/order.service";
 
-export const createOrder = async (order:OrderItem)=> {
+export const createOrder = async (order:any)=> {
     return await orderService.createOrder(order)
 };
 
