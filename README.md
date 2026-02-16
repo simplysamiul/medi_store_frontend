@@ -32,10 +32,6 @@ This project is built with scalability and real-world production standards in mi
 - **Tailwind CSS**
 - **shadcn/ui**
 - **Lucide Icons**
-- **Node js/Express Js**
-- **Prisma**
-- **postgresql**
-- **Better Auth**
 
 ### Authentication
 - JWT-based authentication
